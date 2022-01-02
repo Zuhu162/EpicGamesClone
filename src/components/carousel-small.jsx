@@ -1,19 +1,12 @@
 import React, { useState } from "react";
-import { Carousel } from "react-responsive-carousel";
 import { Chip, Grid, List, ListItemText, Typography } from "@mui/material";
-import fm from "../assets/footballmanager.jpg";
-import bf4 from "../assets/bf4.jpg";
 import Pagination, { paginate } from "./pagination";
 
-function CarouselSmall() {
-  const images = [fm, bf4];
+function CarouselSmall(props) {
+  const games = props.items;
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 1;
-  const [selected, setSelected] = useState();
-  const handleSelect = (item) => {
-    setSelected(item);
-  };
-  console.log(selected);
+  const pageSize = 6;
+  console.log(props);
 
   const handlePageChangeForward = (page) => {
     setCurrentPage(currentPage + 1);
@@ -22,14 +15,17 @@ function CarouselSmall() {
     setCurrentPage(currentPage - 1);
   };
 
-  let paginated = paginate(images, currentPage, pageSize);
+  let paginated = paginate(games, currentPage, pageSize);
 
   return (
     <div>
-      <Grid container mt={10}>
-        <Grid item xs={12}>
+      <Typography variant="h6" color="white" mt={10}>
+        {props.title}
+      </Typography>
+      <Grid container spacing={2}>
+        <Grid item xs={12} textAlign="end">
           <Pagination
-            totalItems={images.length}
+            totalItems={games.length}
             pageSize={pageSize}
             currentPage={currentPage}
             onPageChangeForward={handlePageChangeForward}
@@ -37,29 +33,63 @@ function CarouselSmall() {
           ></Pagination>
         </Grid>
 
-        {paginated.map((img) => (
-          <Grid item xs={5} lg={2} mr={2}>
+        {paginated.map((games) => (
+          <Grid item xs={5} lg={2}>
             <div>
               <div>
                 <img
-                  src={img}
+                  src={games.img1}
                   style={{
                     width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
                     borderRadius: "20px",
-                    marginRight: "20px",
                   }}
                   alt=""
                 />
-                <Typography sx={{ color: "white" }}>Name</Typography>
-                <Typography sx={{ color: "white" }}>
-                  <Chip
-                    sx={{ bgcolor: "#0074E4", color: "white" }}
-                    label="-50%"
-                  ></Chip>
-                  $Price
+                <Typography sx={{ color: "white", mt: "5px" }}>
+                  {games.name}
                 </Typography>
+                <Grid container>
+                  {games.discount ? (
+                    <div>
+                      <Grid item xs={12} lg={3}>
+                        <Chip
+                          sx={{
+                            bgcolor: "#0074E4",
+                            color: "white",
+                            mr: "10px",
+                          }}
+                          label={`-${games.discount}%`}
+                        ></Chip>
+                      </Grid>
+                    </div>
+                  ) : null}
+                  {games.discount ? (
+                    <Grid item xs={12} lg={3}>
+                      <Typography
+                        color="gray"
+                        sx={{ textDecoration: "line-through" }}
+                      >
+                        ${games.price.toFixed(2)}
+                      </Typography>
+                    </Grid>
+                  ) : null}
+
+                  {games.discount ? (
+                    <Grid item xs={12} lg={2}>
+                      <Typography color="white">
+                        $
+                        {(
+                          games.price -
+                          (games.discount * games.price) / 100
+                        ).toFixed(2)}
+                      </Typography>
+                    </Grid>
+                  ) : (
+                    <Grid item xs={12} lg={2}>
+                      <Typography color="white">${games.price}</Typography>
+                    </Grid>
+                  )}
+                </Grid>
               </div>
             </div>
           </Grid>

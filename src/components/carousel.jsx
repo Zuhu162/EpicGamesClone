@@ -7,32 +7,33 @@ import {
   ListItemText,
 } from "@mui/material";
 import { Carousel } from "react-responsive-carousel";
-import fm from "../assets/footballmanager.jpg";
-import bf4 from "../assets/bf4.jpg";
+import fm from "../assets/fm2.jpg";
+import bf4 from "../assets/bf42.jpg";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { getCarouselGames } from "../services/gameInfo";
 
 function CarouselContainer() {
+  const games = getCarouselGames();
   const images = [fm, bf4];
   const [selected, setSelected] = useState();
   const handleSelect = (item) => {
     setSelected(item);
   };
-  console.log(selected);
 
   return (
     <div>
-      <Grid container mt={10}>
-        <Grid item xs={10} mr={2}>
+      <Grid container spacing={2} mt={10}>
+        <Grid item xs={10}>
           <Carousel
             autoPlay={true}
             showArrows={false}
             showThumbs={false}
             selectedItem={selected}
           >
-            {images.map((img) => (
+            {games.map((game) => (
               <div>
                 <img
-                  src={img}
+                  src={game.img2}
                   style={{ width: "100%", borderRadius: "20px" }}
                   alt=""
                 />
@@ -40,12 +41,12 @@ function CarouselContainer() {
             ))}
           </Carousel>
         </Grid>
-        <Grid item xs={1.8}>
+        <Grid item xs={2}>
           <List>
-            {images.map((img) => (
+            {games.map((game) => (
               <ListItem
                 button
-                onClick={() => setSelected(images.indexOf(img))}
+                onClick={() => setSelected(games.indexOf(game))}
                 sx={{
                   // bgcolor: selected === "Store" ? "#232323" : "inherit",
                   color: "white",
@@ -57,11 +58,11 @@ function CarouselContainer() {
                 }}
               >
                 <img
-                  src={img}
+                  src={game.img1}
                   style={{ width: "50%", height: "100%" }}
                   alt=""
                 />
-                <ListItemText sx={{ ml: "20px" }}>Game Title</ListItemText>
+                <ListItemText sx={{ ml: "20px" }}>{game.name}</ListItemText>
               </ListItem>
             ))}
           </List>

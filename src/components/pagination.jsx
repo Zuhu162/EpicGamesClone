@@ -23,7 +23,7 @@ export default function Pagination(props) {
         </Button>
       )}
 
-      {props.currentPage === props.totalItems ? (
+      {props.currentPage === pageNums.length ? (
         <Button disabled>
           <NavigateNextIcon />
         </Button>
