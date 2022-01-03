@@ -7,37 +7,41 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function GamesList(props) {
   return (
     <div>
       <Typography variant="h6" color="white" mt={10}>
-        New Releases
+        {props.title}
       </Typography>
       <List>
         {props.games.map((game) => (
-          <ListItem
-            button
-            sx={{
-              // bgcolor: selected === "Store" ? "#232323" : "inherit",
-              color: "white",
-              padding: "25px",
-              "&:hover": {
-                backgroundColor: "#363636",
-              },
-              borderRadius: "10px",
-            }}
-          >
-            <img src={game} style={{ width: "50%", height: "100%" }} alt="" />
-            <Grid container>
-              <Grid item xs={12}>
-                <ListItemText sx={{ ml: "20px" }}>Game Title</ListItemText>
+          <Link className="text-link" to={`/games/${game.id}`}>
+            <ListItem
+              button
+              sx={{
+                // bgcolor: selected === "Store" ? "#232323" : "inherit",
+                color: "white",
+                padding: "25px",
+                "&:hover": {
+                  backgroundColor: "#363636",
+                },
+                borderRadius: "10px",
+              }}
+            >
+              <img
+                src={game.img2}
+                style={{ width: "50%", height: "100%" }}
+                alt=""
+              />
+              <Grid container>
+                <Grid item xs={12}>
+                  <ListItemText sx={{ ml: "20px" }}>{game.name}</ListItemText>
+                </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <ListItemText sx={{ ml: "20px" }}>$20.99</ListItemText>
-              </Grid>
-            </Grid>
-          </ListItem>
+            </ListItem>
+          </Link>
         ))}
       </List>
     </div>

@@ -11,6 +11,7 @@ import fm from "../assets/fm2.jpg";
 import bf4 from "../assets/bf42.jpg";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { getCarouselGames } from "../services/gameInfo";
+import { Link } from "react-router-dom";
 
 function CarouselContainer() {
   const games = getCarouselGames();
@@ -22,8 +23,8 @@ function CarouselContainer() {
 
   return (
     <div>
-      <Grid container spacing={2} mt={10}>
-        <Grid item xs={10}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} lg={10}>
           <Carousel
             autoPlay={true}
             showArrows={false}
@@ -31,17 +32,19 @@ function CarouselContainer() {
             selectedItem={selected}
           >
             {games.map((game) => (
-              <div>
-                <img
-                  src={game.img2}
-                  style={{ width: "100%", borderRadius: "20px" }}
-                  alt=""
-                />
-              </div>
+              <Link to={`/games/${game.id}`} className="text-link">
+                <div>
+                  <img
+                    src={game.img2}
+                    style={{ width: "100%", borderRadius: "20px" }}
+                    alt=""
+                  />
+                </div>
+              </Link>
             ))}
           </Carousel>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={0} lg={2}>
           <List>
             {games.map((game) => (
               <ListItem

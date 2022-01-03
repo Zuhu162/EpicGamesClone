@@ -22,6 +22,8 @@ import hd1 from "../assets/hd1.jpg";
 import hd2 from "../assets/hd2.jpg";
 import ff1 from "../assets/ff1.jpg";
 import ff2 from "../assets/ff2.jpg";
+import fnt1 from "../assets/fnt1.jpg";
+import fnt2 from "../assets/fnt2.jpg";
 
 const games = [
   {
@@ -29,7 +31,7 @@ const games = [
     name: "Far Cry 6",
     publisher: "Ubisoft",
     release: "10/07/21",
-    link: "https://www.youtube.com/watch?v=-IJuKT1mHO8",
+    link: "https://www.youtube.com/embed/-IJuKT1mHO8",
     price: 59.99,
     img1: fc1,
     img2: fc2,
@@ -40,7 +42,7 @@ const games = [
     name: "Assassin's Creed® Valhalla",
     publisher: "Ubisoft",
     release: "11/17/20",
-    link: "https://www.youtube.com/watch?v=1wiclO4a60A",
+    link: "https://www.youtube.com/embed/1wiclO4a60A",
     price: 59.99,
     img1: acv1,
     img2: acv2,
@@ -51,7 +53,7 @@ const games = [
     name: "Football Manager 2022",
     publisher: "SEGA",
     release: "11/09/21",
-    link: "https://www.youtube.com/watch?v=DfzMZuZAteA",
+    link: "https://www.youtube.com/embed/DfzMZuZAteA",
     price: 36.99,
     img1: fm1,
     img2: fm2,
@@ -62,7 +64,7 @@ const games = [
     name: "Battlefield™ 2042",
     publisher: "Electronic Arts",
     release: "11/19/21",
-    link: "https://www.youtube.com/watch?v=ASzOzrB-a9E",
+    link: "https://www.youtube.com/embed/ASzOzrB-a9E",
     price: 39.99,
     img1: bf41,
     img2: bf42,
@@ -73,7 +75,7 @@ const games = [
     name: "Rise of the Tomb Raider",
     publisher: "Square Enix",
     release: "10/16/16",
-    link: "https://www.youtube.com/watch?v=1_FIyNcQSgA",
+    link: "https://www.youtube.com/embed/1_FIyNcQSgA",
     price: 29.99,
     img1: tr1,
     img2: tr2,
@@ -84,7 +86,7 @@ const games = [
     name: "Red Dead Redemption 2",
     publisher: "Rockstar Games",
     release: "11/05/19",
-    link: "https://www.youtube.com/watch?v=eaW0tYpxyp0",
+    link: "https://www.youtube.com/embed/eaW0tYpxyp0",
     price: 44.99,
     img1: rdr21,
     img2: rdr22,
@@ -96,7 +98,7 @@ const games = [
     name: "Cyberpunk 2077",
     publisher: "CD PROJEKT RED",
     release: "12/10/20",
-    link: "https://www.youtube.com/watch?v=qIcTM8WXFjk",
+    link: "https://www.youtube.com/embed/qIcTM8WXFjk",
     price: 14.99,
     img1: cp20771,
     img2: cp20772,
@@ -108,7 +110,7 @@ const games = [
     name: "Grand Theft Auto V",
     publisher: "Rockstar Games",
     release: "05/14/20",
-    link: "https://www.youtube.com/watch?v=xQT-O1nMSBU",
+    link: "https://www.youtube.com/embed/xQT-O1nMSBU",
     price: 24.99,
     img1: gtav1,
     img2: gtav2,
@@ -119,7 +121,7 @@ const games = [
     name: "NARAKA: BLADEPOINT",
     publisher: "NetEase Montreal",
     release: "08/11/21",
-    link: "https://www.youtube.com/watch?v=Q_uBBXiqL1s",
+    link: "https://www.youtube.com/embed/Q_uBBXiqL1s",
     price: 19.99,
     img1: nb1,
     img2: nb2,
@@ -130,7 +132,7 @@ const games = [
     name: "Kena: Bridge of Spirits",
     publisher: "Ember Lab",
     release: "09/21/21",
-    link: "https://www.youtube.com/watch?v=23dNZqxnytU",
+    link: "https://www.youtube.com/embed/23dNZqxnytU",
     price: 15.99,
     img1: kb1,
     img2: kb2,
@@ -141,7 +143,7 @@ const games = [
     name: "Horizon Zero Dawn™ Complete Edition",
     publisher: "PlayStation PC LLC",
     release: "08/07/20",
-    link: "https://www.youtube.com/watch?v=76O5KaJHEA0",
+    link: "https://www.youtube.com/embed/76O5KaJHEA0",
     price: 24.99,
     img1: hd1,
     img2: hd2,
@@ -152,13 +154,26 @@ const games = [
     name: "FINAL FANTASY VII REMAKE INTERGRADE",
     publisher: "Square Enix",
     release: "12/16/21",
-    link: "https://www.youtube.com/watch?v=ERgrFVhL-n4",
+    link: "https://www.youtube.com/embed/ERgrFVhL-n4",
     price: 69.99,
     img1: ff1,
     img2: ff2,
     desc: "Cloud Strife, an ex-SOLDIER operative, descends on the mako-powered city of Midgar. The world of the timeless classic FINAL FANTASY VII is reborn, using cutting-edge graphics technology, a new battle system and an additional adventure featuring Yuffie Kisaragi.",
   },
+  {
+    id: "14",
+    name: "Fortnite",
+    publisher: "Epic Games",
+    release: "07/21/17",
+    link: "https://www.youtube.com/embed/knAYcg7Tt8E",
+    price: 0,
+    img1: fnt1,
+    img2: fnt2,
+    desc: "The Island you once knew has been turned upside down...literally. Step foot onto the new Island and explore every corner of an undiscovered world in Fortnite Chapter 3 Season 1: Flipped.",
+  },
 ];
+
+//Games Provider
 
 export const getSpotLightGames = () => {
   let spotLightGames = [];
@@ -171,9 +186,8 @@ export const getSpotLightGames = () => {
 
 export const getMostPopularGames = () => {
   let popularGames = [];
-  for (let i = 0; i < games.length; i++) {
+  for (let i = 1; i < games.length; i++) {
     popularGames.push(games[i]);
-    popularGames.reverse();
   }
   return popularGames;
 };
@@ -197,4 +211,20 @@ export const getFeaturedGames2 = () => {
     featuredGames2.push(games[i]);
   }
   return featuredGames2;
+};
+
+export const getFreeGames = () => {
+  const freeGames = games.find((game) => game.price === 0);
+  return freeGames;
+};
+
+//Games Provider
+
+//Single Game
+export const getSingleGame = (ID) => {
+  let single = games.find((game) => {
+    return game.id === ID;
+  });
+
+  return single;
 };

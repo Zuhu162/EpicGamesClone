@@ -9,6 +9,7 @@ import GamesList from "../components/list";
 import {
   getFeaturedGames,
   getFeaturedGames2,
+  getFreeGames,
   getMostPopularGames,
   getSpotLightGames,
 } from "../services/gameInfo";
@@ -19,10 +20,15 @@ function Home() {
   const popularGames = getMostPopularGames();
   const featuredGames = getFeaturedGames();
   const featuredGames2 = getFeaturedGames2();
+  const freeGames = getFreeGames();
+
+  const topSellers = [popularGames[3], spotLightGames[0]];
+  const newReleases = [spotLightGames[4], spotLightGames[1]];
+  const recentlyUpdated = [spotLightGames[5], spotLightGames[6]];
 
   return (
     <div>
-      <Grid container spacing={3} mb={10}>
+      <Grid container spacing={3}>
         <Grid item>
           <Carousel></Carousel>
           <CarouselSmall
@@ -34,14 +40,18 @@ function Home() {
           <Featured games={featuredGames}></Featured>
         </Grid>
         <Grid item xs={12} lg={4}>
-          <GamesList games={images}></GamesList>
+          <GamesList games={newReleases} title={"New Releases"}></GamesList>
         </Grid>
         <Grid item xs={12} lg={4}>
-          <GamesList games={images}></GamesList>
+          <GamesList games={topSellers} title={"Top Sellers"}></GamesList>
         </Grid>
         <Grid item xs={12} lg={4}>
-          <GamesList games={images}></GamesList>
+          <GamesList
+            games={recentlyUpdated}
+            title={"Recently Updated"}
+          ></GamesList>
         </Grid>
+
         <Grid item xs={12}>
           <Featured games={featuredGames2}></Featured>
         </Grid>
@@ -50,9 +60,6 @@ function Home() {
             title={"Most Popular ⬇"}
             items={popularGames}
           ></CarouselSmall>
-        </Grid>
-        <Grid item xs={12}>
-          <CarouselSmall items={[]}></CarouselSmall>
         </Grid>
       </Grid>
     </div>

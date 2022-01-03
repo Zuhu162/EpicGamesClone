@@ -14,20 +14,34 @@ import ListItemText from "@mui/material/ListItemText";
 import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
 import Typography from "@mui/material/Typography";
+import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material/Badge";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Alert from "@mui/material/Alert";
+import PeopleIcon from "@mui/icons-material/People";
 import logo from "../assets/logo.png";
-import { Button, Card, CardContent, Icon } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  Card,
+  CardContent,
+  Container,
+  Icon,
+  TextField,
+} from "@mui/material";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 350;
 
 function ResponsiveDrawer(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -38,6 +52,13 @@ function ResponsiveDrawer(props) {
     setSelected(item);
   };
 
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const drawer = (
     <div>
       <Card>
@@ -53,23 +74,25 @@ function ResponsiveDrawer(props) {
           </Toolbar>
           <Divider />
           <List>
-            <ListItem
-              button
-              onClick={() => handleSelect("Store")}
-              sx={{
-                bgcolor: selected === "Store" ? "#232323" : "inherit",
-                padding: "25px",
-                "&:hover": {
-                  backgroundColor: "#363636",
-                },
-                borderRadius: "10px",
-              }}
-            >
-              <ListItemIcon>
-                <ShoppingCartIcon sx={{ color: "white" }} />
-              </ListItemIcon>
-              <ListItemText>Store</ListItemText>
-            </ListItem>
+            <Link className="text-link" to="/">
+              <ListItem
+                button
+                onClick={() => handleSelect("Store")}
+                sx={{
+                  bgcolor: selected === "Store" ? "#232323" : "inherit",
+                  padding: "25px",
+                  "&:hover": {
+                    backgroundColor: "#363636",
+                  },
+                  borderRadius: "10px",
+                }}
+              >
+                <ListItemIcon>
+                  <ShoppingCartIcon sx={{ color: "white" }} />
+                </ListItemIcon>
+                <ListItemText>Store</ListItemText>
+              </ListItem>
+            </Link>
             <ListItem
               button
               onClick={() => handleSelect("Library")}
@@ -116,11 +139,80 @@ function ResponsiveDrawer(props) {
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { xl: "none" } }}
           >
-            <ShoppingCartIcon />
+            <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Fresheries
-          </Typography>
+
+          <Box
+            sx={{
+              width: "100%",
+              textAlign: "center",
+              display: { xs: "none", lg: "block" },
+            }}
+          >
+            <SearchIcon sx={{ mt: "15px", mr: "10px" }}></SearchIcon>
+            <TextField
+              sx={{
+                backgroundColor: "white",
+                borderRadius: "20px",
+                height: "50px",
+              }}
+              placeholder="Search"
+            ></TextField>
+          </Box>
+          <Box sx={{ width: "100%", textAlign: "right" }}>
+            <Button>
+              <PeopleIcon sx={{ color: "gray" }} />
+            </Button>
+            <Button onClick={handleMenu}>
+              <Avatar sx={{ bgcolor: "#232323" }}>S</Avatar>
+            </Button>
+          </Box>
+          <Menu
+            sx={{ mt: "50px" }}
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <Card
+              sx={{
+                bgcolor: "#232323",
+                color: "gray",
+                width: "400px",
+                height: "400px",
+                mt: "-10px",
+                mb: "-8px",
+                padding: "5px",
+              }}
+            >
+              <CardContent sx={{ bgcolor: "#23232" }}>
+                <Link to="https://github.com/Zuhu162">
+                  <Typography
+                    variant="h5"
+                    fontWeight="bold"
+                    color="white"
+                    mt={3}
+                  >
+                    Zuhu162
+                  </Typography>
+                </Link>
+                <Divider sx={{ bgcolor: "gray", mt: "30px" }}></Divider>
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleClose}>Sign Out</MenuItem>
+                <Divider sx={{ bgcolor: "gray", mt: "30px" }}></Divider>
+              </CardContent>
+            </Card>
+          </Menu>
         </Toolbar>
       </AppBar>
       <Box
