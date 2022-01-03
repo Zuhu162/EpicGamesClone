@@ -1,13 +1,39 @@
 import { Button, Chip, Divider, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getSingleGame, getSpotLightGames } from "../services/gameInfo";
+import { Link, useParams } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
+
+import {
+  addToLibrary,
+  getLibraryGames,
+  getSingleGame,
+  getSpotLightGames,
+} from "../services/gameInfo";
+import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function SingleGame() {
+  const history = useHistory();
   const { id } = useParams();
   const game = getSingleGame(id);
   getSpotLightGames();
+
+  const libraryGames = getLibraryGames();
+  let isInLibrary = libraryGames.find((game) => {
+    return game.id === id;
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleLibraryAdd = (id) => {
+    setLoading(true);
+    setTimeout(() => {
+      addToLibrary(id);
+      history.push("/library");
+    }, 3000);
+  };
+  console.log(isInLibrary);
 
   return (
     <div>
@@ -63,15 +89,44 @@ function SingleGame() {
                 )}
               </Grid>
             </Typography>
-            <Button
-              variant="contained"
-              sx={{ width: "100%", padding: "15px", mb: "20px" }}
-            >
-              Buy Now
-            </Button>
-            <Button variant="outlined" sx={{ width: "100%", padding: "15px" }}>
-              Add to Cart
-            </Button>
+            {!isInLibrary ? (
+              loading === true ? (
+                <Button
+                  sx={{ width: "100%", padding: "15px", mb: "20px" }}
+                  variant="contained"
+                >
+                  <CircularProgress sx={{ color: "white" }} />
+                </Button>
+              ) : (
+                <Box>
+                  <Button
+                    variant="contained"
+                    sx={{ width: "100%", padding: "15px", mb: "20px" }}
+                    onClick={() => handleLibraryAdd(game.id)}
+                  >
+                    Buy Now
+                  </Button>
+                  <Link className="text-link" to="/">
+                    <Button
+                      variant="outlined"
+                      sx={{ width: "100%", padding: "15px" }}
+                    >
+                      ⬅ Back To Store
+                    </Button>
+                  </Link>
+                </Box>
+              )
+            ) : (
+              <Link className="text-link" to="/library">
+                <Button
+                  sx={{ width: "100%", padding: "15px" }}
+                  variant="contained"
+                >
+                  In Library
+                </Button>
+              </Link>
+            )}
+
             <Box
               sx={{
                 display: "flex",

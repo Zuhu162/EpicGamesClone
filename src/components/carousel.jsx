@@ -28,6 +28,7 @@ function CarouselContainer() {
           <Carousel
             autoPlay={true}
             showArrows={false}
+            infiniteLoop={true}
             showThumbs={false}
             selectedItem={selected}
           >
@@ -44,7 +45,7 @@ function CarouselContainer() {
             ))}
           </Carousel>
         </Grid>
-        <Grid item xs={0} lg={2}>
+        <Grid item sx={{ display: { xs: "none", lg: "block" } }} lg={2}>
           <List>
             {games.map((game) => (
               <ListItem

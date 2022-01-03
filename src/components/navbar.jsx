@@ -1,40 +1,27 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Typography from "@mui/material/Typography";
-import SearchIcon from "@mui/icons-material/Search";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import Badge from "@mui/material/Badge";
-import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import Alert from "@mui/material/Alert";
+import GitHubIcon from "@mui/icons-material/GitHub";
 import PeopleIcon from "@mui/icons-material/People";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import GridViewSharpIcon from "@mui/icons-material/GridViewSharp";
 import logo from "../assets/logo.png";
-import {
-  Avatar,
-  Button,
-  Card,
-  CardContent,
-  Container,
-  Icon,
-  TextField,
-} from "@mui/material";
+import { Avatar, Button, Card, CardContent, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const drawerWidth = 350;
 
@@ -47,7 +34,9 @@ function ResponsiveDrawer(props) {
     setMobileOpen(!mobileOpen);
   };
 
-  const [selected, setSelected] = useState("Store");
+  const location = useLocation();
+
+  const [selected, setSelected] = useState(location.pathname);
   const handleSelect = (item) => {
     setSelected(item);
   };
@@ -56,9 +45,14 @@ function ResponsiveDrawer(props) {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleMenu2 = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const drawer = (
     <div>
       <Card>
@@ -77,9 +71,9 @@ function ResponsiveDrawer(props) {
             <Link className="text-link" to="/">
               <ListItem
                 button
-                onClick={() => handleSelect("Store")}
+                onClick={() => handleSelect("/")}
                 sx={{
-                  bgcolor: selected === "Store" ? "#232323" : "inherit",
+                  bgcolor: selected === "/" ? "#232323" : "inherit",
                   padding: "25px",
                   "&:hover": {
                     backgroundColor: "#363636",
@@ -88,28 +82,30 @@ function ResponsiveDrawer(props) {
                 }}
               >
                 <ListItemIcon>
-                  <ShoppingCartIcon sx={{ color: "white" }} />
+                  <LocalOfferIcon sx={{ color: "white" }} />
                 </ListItemIcon>
                 <ListItemText>Store</ListItemText>
               </ListItem>
             </Link>
-            <ListItem
-              button
-              onClick={() => handleSelect("Library")}
-              sx={{
-                bgcolor: selected === "Library" ? "#232323" : "inherit",
-                padding: "25px",
-                "&:hover": {
-                  backgroundColor: "#363636",
-                },
-                borderRadius: "10px",
-              }}
-            >
-              <ListItemIcon>
-                <ArrowForwardIcon sx={{ color: "white" }} />
-              </ListItemIcon>
-              <ListItemText>Library</ListItemText>
-            </ListItem>
+            <Link className="text-link" to="/library">
+              <ListItem
+                button
+                onClick={() => handleSelect("/library")}
+                sx={{
+                  bgcolor: selected === "/library" ? "#232323" : "inherit",
+                  padding: "25px",
+                  "&:hover": {
+                    backgroundColor: "#363636",
+                  },
+                  borderRadius: "10px",
+                }}
+              >
+                <ListItemIcon>
+                  <GridViewSharpIcon sx={{ color: "white" }} />
+                </ListItemIcon>
+                <ListItemText>Library</ListItemText>
+              </ListItem>
+            </Link>
           </List>
           <List></List>
         </CardContent>
@@ -142,24 +138,12 @@ function ResponsiveDrawer(props) {
             <MenuIcon />
           </IconButton>
 
-          <Box
-            sx={{
-              width: "100%",
-              textAlign: "center",
-              display: { xs: "none", lg: "block" },
-            }}
-          >
-            <SearchIcon sx={{ mt: "15px", mr: "10px" }}></SearchIcon>
-            <TextField
-              sx={{
-                backgroundColor: "white",
-                borderRadius: "20px",
-                height: "50px",
-              }}
-              placeholder="Search"
-            ></TextField>
-          </Box>
           <Box sx={{ width: "100%", textAlign: "right" }}>
+            <a target="_blank" href="https://github.com/Zuhu162">
+              <Button>
+                <GitHubIcon sx={{ color: "gray" }} />
+              </Button>
+            </a>
             <Button>
               <PeopleIcon sx={{ color: "gray" }} />
             </Button>
@@ -188,28 +172,21 @@ function ResponsiveDrawer(props) {
                 bgcolor: "#232323",
                 color: "gray",
                 width: "400px",
-                height: "400px",
+
                 mt: "-10px",
                 mb: "-8px",
                 padding: "5px",
               }}
             >
               <CardContent sx={{ bgcolor: "#23232" }}>
-                <Link to="https://github.com/Zuhu162">
-                  <Typography
-                    variant="h5"
-                    fontWeight="bold"
-                    color="white"
-                    mt={3}
-                  >
-                    Zuhu162
-                  </Typography>
-                </Link>
+                <Typography variant="h5" fontWeight="bold" color="white" mt={3}>
+                  Zuhu162
+                </Typography>
                 <Divider sx={{ bgcolor: "gray", mt: "30px" }}></Divider>
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Sign Out</MenuItem>
                 <Divider sx={{ bgcolor: "gray", mt: "30px" }}></Divider>
+                <MenuItem onClick={handleClose}>Sign Out</MenuItem>
               </CardContent>
             </Card>
           </Menu>
@@ -230,7 +207,7 @@ function ResponsiveDrawer(props) {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: "block", sm: "none" },
+            display: { xs: "block", xl: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
@@ -242,7 +219,7 @@ function ResponsiveDrawer(props) {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: "none", lg: "block" },
+            display: { xs: "none", xl: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,

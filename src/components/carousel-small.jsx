@@ -48,26 +48,26 @@ function CarouselSmall(props) {
                     alt=""
                   />
                 </Link>
-                <Typography sx={{ color: "white", mt: "5px" }}>
+                <Typography
+                  sx={{ color: "white", mt: "5px", fontSize: "12px" }}
+                >
                   {games.name}
                 </Typography>
                 <Grid container>
                   {games.discount ? (
-                    <div>
-                      <Grid item xs={12} lg={3}>
-                        <Chip
-                          sx={{
-                            bgcolor: "#0074E4",
-                            color: "white",
-                            mr: "10px",
-                          }}
-                          label={`-${games.discount}%`}
-                        ></Chip>
-                      </Grid>
-                    </div>
+                    <Grid item xs={12} lg={12} xl={3}>
+                      <Chip
+                        sx={{
+                          bgcolor: "#0074E4",
+                          color: "white",
+                          mr: "10px",
+                        }}
+                        label={`-${games.discount}%`}
+                      ></Chip>
+                    </Grid>
                   ) : null}
                   {games.discount ? (
-                    <Grid item xs={12} lg={3}>
+                    <Grid item mt={0.5} xs={12} lg={6} xl={3}>
                       <Typography
                         color="gray"
                         sx={{ textDecoration: "line-through" }}
@@ -78,7 +78,7 @@ function CarouselSmall(props) {
                   ) : null}
 
                   {games.discount ? (
-                    <Grid item xs={12} lg={2}>
+                    <Grid item mt={0.5} xs={12} lg={6} xl={3}>
                       <Typography color="white">
                         $
                         {(
@@ -88,7 +88,7 @@ function CarouselSmall(props) {
                       </Typography>
                     </Grid>
                   ) : (
-                    <Grid item xs={12} lg={2}>
+                    <Grid item mt={0.5} xs={12} lg={6} xl={3}>
                       <Typography color="white">${games.price}</Typography>
                     </Grid>
                   )}

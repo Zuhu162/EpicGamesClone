@@ -2,6 +2,7 @@ import React from "react";
 import { Chip, Grid, List, ListItemText, Typography } from "@mui/material";
 import { getFeaturedGames } from "../services/gameInfo";
 import { Link } from "react-router-dom";
+import { Box } from "@mui/system";
 
 function Featured(props) {
   const games = props.games;
@@ -26,28 +27,33 @@ function Featured(props) {
                   {game.name}
                 </Typography>
               </Link>
-              <Typography
-                sx={{ color: "gray", mt: "5px", mb: "10px", fontSize: "12px" }}
-              >
-                {game.desc}
-              </Typography>
+              <Box sx={{ height: "100px" }}>
+                <Typography
+                  sx={{
+                    color: "gray",
+                    mt: "5px",
+                    mb: "10px",
+                    fontSize: "12px",
+                  }}
+                >
+                  {game.desc}
+                </Typography>
+              </Box>
               <Grid container>
-                {game.discount ? (
-                  <div>
-                    <Grid item xs={12} lg={12}>
-                      <Chip
-                        sx={{
-                          bgcolor: "#0074E4",
-                          color: "white",
-                          mr: "10px",
-                        }}
-                        label={`-${game.discount}%`}
-                      ></Chip>
-                    </Grid>
-                  </div>
-                ) : null}
-                {game.discount ? (
-                  <Grid item xs={12} lg={2} mr={-5}>
+                <Grid item xs={12} lg={1.5} xl={1}>
+                  {game.discount ? (
+                    <Chip
+                      sx={{
+                        bgcolor: "#0074E4",
+                        color: "white",
+                        mr: "10px",
+                      }}
+                      label={`-${game.discount}%`}
+                    ></Chip>
+                  ) : null}
+                </Grid>
+                <Grid item xs={12} lg={2} xl={1.5}>
+                  {game.discount ? (
                     <Typography
                       color="gray"
                       variant="h5"
@@ -55,11 +61,10 @@ function Featured(props) {
                     >
                       ${game.price.toFixed(2)}
                     </Typography>
-                  </Grid>
-                ) : null}
-
-                {game.discount ? (
-                  <Grid item xs={12} lg={4}>
+                  ) : null}
+                </Grid>
+                <Grid item xs={12} lg={2} xl={1}>
+                  {game.discount ? (
                     <Typography color="white" variant="h5">
                       $
                       {(
@@ -67,12 +72,10 @@ function Featured(props) {
                         (game.discount * game.price) / 100
                       ).toFixed(2)}
                     </Typography>
-                  </Grid>
-                ) : (
-                  <Grid item xs={12} lg={2}>
+                  ) : (
                     <Typography color="white">${game.price}</Typography>
-                  </Grid>
-                )}
+                  )}
+                </Grid>
               </Grid>
             </div>
           </Grid>

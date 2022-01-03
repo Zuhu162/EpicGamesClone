@@ -175,6 +175,10 @@ const games = [
 
 //Games Provider
 
+export const getAllGames = () => {
+  return games;
+};
+
 export const getSpotLightGames = () => {
   let spotLightGames = [];
   for (let i = 0; i < games.length; i += 2) {
@@ -227,4 +231,41 @@ export const getSingleGame = (ID) => {
   });
 
   return single;
+};
+
+//Library Games
+let library = [
+  {
+    id: "8",
+    name: "Grand Theft Auto V",
+    publisher: "Rockstar Games",
+    release: "05/14/20",
+    link: "https://www.youtube.com/embed/xQT-O1nMSBU",
+    price: 24.99,
+    img1: gtav1,
+    img2: gtav2,
+    desc: "The Grand Theft Auto V: Premium Edition includes the complete GTAV story, Grand Theft Auto Online and all existing gameplay upgrades and content. You’ll also get the Criminal Enterprise Starter Pack, the fastest way to jumpstart your criminal empire in GTA Online.",
+  },
+  {
+    id: "11",
+    name: "Horizon Zero Dawn™ Complete Edition",
+    publisher: "PlayStation PC LLC",
+    release: "08/07/20",
+    link: "https://www.youtube.com/embed/76O5KaJHEA0",
+    price: 24.99,
+    img1: hd1,
+    img2: hd2,
+    desc: "Experience Aloy’s legendary quest to unravel the mysteries of a future Earth ruled by Machines. Use devastating tactical attacks against your prey and explore a majestic open world in this award-winning action RPG!",
+  },
+];
+export const getLibraryGames = () => {
+  return library;
+};
+
+//Add to Library
+export const addToLibrary = (ID) => {
+  let game = games.find((game) => {
+    return game.id === ID;
+  });
+  library.push(game);
 };
