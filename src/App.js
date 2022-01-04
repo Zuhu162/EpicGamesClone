@@ -12,7 +12,6 @@ import SearchGames from "./pages/searchGames";
 
 function App() {
   const [search, setSearch] = useState("");
-  console.log(search);
   return (
     <Router>
       <div className="App">
@@ -50,21 +49,21 @@ function App() {
               <Navbar></Navbar>
             </Grid>
             <Grid item xl={10}>
-              {search.length <= 2 ? (
-                <Switch>
-                  <Route path="/games/:id">
-                    <SingleGame />
-                  </Route>
-                  <Route path="/library">
-                    <Library />
-                  </Route>
-                  <Route path="/">
+              <Switch>
+                <Route path="/games/:id">
+                  <SingleGame />
+                </Route>
+                <Route path="/library">
+                  <Library />
+                </Route>
+                <Route path="/">
+                  {search.length <= 2 ? (
                     <Home />
-                  </Route>
-                </Switch>
-              ) : (
-                <SearchGames filter={search} />
-              )}
+                  ) : (
+                    <SearchGames filter={search} />
+                  )}
+                </Route>
+              </Switch>
             </Grid>
           </Grid>
         </Box>
