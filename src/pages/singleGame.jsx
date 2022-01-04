@@ -37,7 +37,7 @@ function SingleGame() {
 
   return (
     <div>
-      <Box>
+      <Box padding="20px">
         <Typography color="white" variant="h3" mb={5}>
           {game.name}
         </Typography>

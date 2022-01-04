@@ -44,7 +44,7 @@ function App() {
             placeholder="Search"
           ></TextField>
         </Box>
-        <Box padding="20px">
+        <Box padding="40px">
           <Grid container spacing={5}>
             <Grid item display={{ xs: "1" }} xl={2}>
               <Navbar></Navbar>
