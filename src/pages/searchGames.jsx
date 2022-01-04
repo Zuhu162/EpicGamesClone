@@ -2,6 +2,7 @@ import React from "react";
 import { getAllGames } from "../services/gameInfo";
 import { Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { Link } from "react-router-dom";
 
 function SearchGames(props) {
   const games = getAllGames();
