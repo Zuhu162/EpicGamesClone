@@ -44,11 +44,11 @@ function App() {
           ></TextField>
         </Box>
         <Box padding="40px">
-          <Grid container spacing={5}>
-            <Grid item display={{ xs: "1" }} xl={2}>
+          <Grid container spacing={2}>
+            <Grid item display={{ xs: "1" }} xl={3}>
               <Navbar></Navbar>
             </Grid>
-            <Grid item xl={10}>
+            <Grid item xl={9}>
               <Switch>
                 <Route path="/games/:id">
                   <SingleGame />
